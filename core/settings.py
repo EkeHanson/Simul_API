@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-2me%54_m481*_e033+eb91j5fi0k10^@^2^1^-uqtcz9_*f84i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wall-mart-api.onrender.com', '127.0.0.1','jumia-clone-api-11vb.onrender.com']
+ALLOWED_HOSTS = ['simul-api.onrender.com', '127.0.0.1','jumia-clone-api-11vb.onrender.com']
 
 # Application definition
 
