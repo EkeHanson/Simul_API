@@ -1,5 +1,6 @@
-from .models import ClientIP
 # client_tracking/middleware.py
+from .models import ClientIP
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -14,6 +15,11 @@ class ClientIPTrackingMiddleware:
 
     def __call__(self, request):
         ip = get_client_ip(request)
-        ClientIP.objects.create(ip_address=ip)
+
+        # Check if the IP address already exists
+        existing_ip = ClientIP.objects.filter(ip_address=ip).first()
+        if not existing_ip:
+            ClientIP.objects.create(ip_address=ip)
+
         response = self.get_response(request)
         return response

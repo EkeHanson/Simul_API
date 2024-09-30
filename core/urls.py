@@ -11,6 +11,10 @@ urlpatterns = [
     path('api/accounts/', include('users.urls')),
     path('api/news/update/', include('news.urls')),
     path('api/messages/update/', include('user_message.urls')),
+    
+    path('api/news/update/', include('news.urls')),
+
+    path('api/jobs/update/', include('jobs.urls')),
 
     path('api/client-tracking/', include('client_tracking.urls')),  # IP tracking and GDPR consent
     path('api/bookings/', include('bookings.urls')),  # Consultations/Bookings
