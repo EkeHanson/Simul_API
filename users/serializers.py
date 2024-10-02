@@ -18,16 +18,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = "__all__"
     
-    # def create(self, validated_data):
-    #     user = CustomUser.objects.create_user(
-    #         email=validated_data['email'],
-    #         phone=validated_data['phone'],
-    #         # full_name=validated_data['full_name'],
-    #         password=validated_data['password']
-    #     )
-    #     return user
 
-
-class UserLoginSerializer(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()

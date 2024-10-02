@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .models import CustomUser
-from .serializers import UserRegistrationSerializer, UserLoginSerializer, SendOTPSerializer, VerifyOTPSerializer
+from .serializers import UserRegistrationSerializer, LoginSerializer, SendOTPSerializer, VerifyOTPSerializer
 from rest_framework.permissions import AllowAny
 import requests
 from django.conf import settings
@@ -81,7 +81,7 @@ class RegisterView(viewsets.ModelViewSet):
 
 
 class LoginView(generics.GenericAPIView):
-    serializer_class = UserLoginSerializer
+    serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
@@ -90,7 +90,7 @@ class LoginView(generics.GenericAPIView):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
         user = authenticate(email=email, password=password)
-        
+
         if user is not None:
             refresh = RefreshToken.for_user(user)
             return Response({
@@ -103,8 +103,8 @@ class LoginView(generics.GenericAPIView):
                 'last_name': user.last_name,
                 'date_joined': user.date_joined,
             })
+        
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
 
 
 @api_view(['POST'])

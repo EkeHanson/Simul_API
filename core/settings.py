@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-2me%54_m481*_e033+eb91j5fi0k10^@^2^1^-uqtcz9_*f84i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['simul-api.onrender.com', '127.0.0.1','jumia-clone-api-11vb.onrender.com']
+ALLOWED_HOSTS = ['simul-api.onrender.com', 'localhost', '127.0.0.1','jumia-clone-api-11vb.onrender.com']
 
 # Application definition
 
@@ -61,13 +61,13 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 
 # # Configure CORS
-# CORS_ALLOWED_ORIGINS = [
-#     "https://www.jumiaonlineshopping.net",  # Add your frontend's origin here
-#     # Add any other origins you want to allow
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "https://simul-website.vercel.app",  # Add your frontend's origin here
+    # Add any other origins you want to allow
+]
 
 # Optional: Allow all origins (for development only)
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 
 REST_FRAMEWORK = {
@@ -148,13 +148,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'simuldb_prlj',
-        'USER': 'simuldb_prlj_user',
-        'PASSWORD': 'VwedCMhUXLjN5KI99GXJgOU37MWcG2YR',
-        'HOST': 'dpg-crukirtumphs73ep4lb0-a.oregon-postgres.render.com',
+        'NAME': 'simultestdb',
+        'USER': 'simultestdb_user',
+        'PASSWORD': 'Rc9QG7swXCXPyfZdIfZ578NoWSNDFrrl',
+        'HOST': 'dpg-crum4c5umphs73eq06d0-a.oregon-postgres.render.com',
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
