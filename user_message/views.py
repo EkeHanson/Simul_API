@@ -14,13 +14,63 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     pagination_class = CustomPagination  # Enable pagination with custom class
 
-    def get_serializer_context(self):
-        # Add the request to the context
-        context = super().get_serializer_context()
-        context.update({
-            'request': self.request,
-        })
-        return context
+
+    def create(self, request, *args, **kwargs):
+        # print("request.data", request.data)
+        try:
+            response = super().create(request, *args, **kwargs)
+            
+            if response.status_code == status.HTTP_201_CREATED:
+                full_user = request.data.get('full_user')
+                userEmail = request.data.get('userEmail')
+                service_of_interest = request.data.get('service_of_interest')
+                description = request.data.get('description')
+
+                if userEmail:
+                    subject = 'Reply to Message on Simul Website'
+                    message = f'''
+                    <html>
+                    <body>
+                        <h3>Message from {full_user}</h3>
+                        <p><strong>Full Name:</strong> Hi Admin I am interested in {service_of_interest}</p>
+                        <p><strong>Message:</strong> {description}</p>
+                    </body>
+                    </html>
+                    '''
+                    recipient_list = ["ekenehanson@gmail.com"]
+                    from_email = userEmail
+
+                    try:
+                        send_mail(
+                            subject,
+                            '',
+                            from_email,
+                            recipient_list,
+                            fail_silently=False,
+                            html_message=message
+                        )
+                        return Response({'message': 'Reply created and email sent successfully'}, status=status.HTTP_201_CREATED)
+                    except Exception as e:
+                        print(f"Error sending email: {str(e)}")
+                        return Response({'error': 'Failed to send email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                else:
+                    return Response({'error': 'Email not provided in POST data'}, status=status.HTTP_400_BAD_REQUEST)
+
+            return response
+
+        except Exception as e:
+            print(f"Error during reply creation: {str(e)}")  # Log the error for debugging
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+
+    # def get_serializer_context(self):
+    #     # Add the request to the context
+    #     context = super().get_serializer_context()
+    #     context.update({
+    #         'request': self.request,
+    #     })
+    #     return context
 
 
 class ReplyViewSet(viewsets.ModelViewSet):

@@ -148,15 +148,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'simuldb',
-        'USER': 'simuldb_user',
-        'PASSWORD': 'BaEsrIuSuNeT1bbY5PYMlJumBua7H4Q6',
-        'HOST': 'dpg-croi5nij1k6c739hutsg-a.oregon-postgres.render.com',
+        'NAME': 'simuldb_prlj',
+        'USER': 'simuldb_prlj_user',
+        'PASSWORD': 'VwedCMhUXLjN5KI99GXJgOU37MWcG2YR',
+        'HOST': 'dpg-crukirtumphs73ep4lb0-a.oregon-postgres.render.com',
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
