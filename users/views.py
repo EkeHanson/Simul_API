@@ -10,6 +10,7 @@ from rest_framework.permissions import AllowAny
 import requests
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from .serializers import LoginSerializer
 
 
 class SendOTPView(generics.GenericAPIView):
@@ -85,14 +86,22 @@ class LoginView(generics.GenericAPIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
+        # Validate the input data
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        # Extract validated email and password
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
-        user = authenticate(email=email, password=password)
+
+        # Authenticate user using email and password
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
+            # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
+
+            # Return tokens and user details on successful login
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
@@ -102,9 +111,34 @@ class LoginView(generics.GenericAPIView):
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'date_joined': user.date_joined,
-            })
-        
+            }, status=status.HTTP_200_OK)
+
+        # Return error if authentication fails
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+# class LoginView(generics.GenericAPIView):
+#     serializer_class = LoginSerializer
+#     permission_classes = [AllowAny]
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         email = serializer.validated_data['email']
+#         password = serializer.validated_data['password']
+#         user = authenticate(email=email, password=password)
+#         if user is not None:
+#             refresh = RefreshToken.for_user(user)
+#             return Response({
+#                 'refresh': str(refresh),
+#                 'access': str(refresh.access_token),
+#                 'email': user.email,
+#                 'user_type': user.user_type,
+#                 'userId': user.id,
+#                 'first_name': user.first_name,
+#                 'last_name': user.last_name,
+#                 'date_joined': user.date_joined,
+#             })
+#         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['POST'])

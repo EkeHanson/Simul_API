@@ -148,13 +148,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'simultestdb',
-        'USER': 'simultestdb_user',
-        'PASSWORD': 'Rc9QG7swXCXPyfZdIfZ578NoWSNDFrrl',
-        'HOST': 'dpg-crum4c5umphs73eq06d0-a.oregon-postgres.render.com',
+        'NAME': 'simul_test_db',  # Database name
+        'USER': 'simul_test_db_user',  # Database user
+        'PASSWORD': 'aryCJJ71Lq40ZzUWQ8U3qiNSywYqK8TO',  # Database password
+        'HOST': 'dpg-cs1qpkdds78s73b92urg-a.oregon-postgres.render.com',  # Database host
         'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
@@ -187,7 +188,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -200,6 +200,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
