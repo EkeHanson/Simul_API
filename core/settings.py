@@ -59,15 +59,15 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 
 
-
 # # Configure CORS
-CORS_ALLOWED_ORIGINS = [
-    "https://simul-website.vercel.app",  # Add your frontend's origin here
-    # Add any other origins you want to allow
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "https://simul-website.vercel.app", 
+#      "http://localhost:3000" # Add your frontend's origin here
+#     # Add any other origins you want to allow
+# ]
 
 # Optional: Allow all origins (for development only)
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 REST_FRAMEWORK = {
