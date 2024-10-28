@@ -57,8 +57,6 @@ ROOT_URLCONF = 'core.urls'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-
-
 # # Configure CORS
 # CORS_ALLOWED_ORIGINS = [
 #     "https://simul-website.vercel.app", 
@@ -71,15 +69,21 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 REST_FRAMEWORK = {
+    
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,  # 10 messages per page
-
+    
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+
+    'DEFAULT_RENDERER_CLASSES': [
+    'rest_framework.renderers.JSONRenderer',
+    # 'rest_framework.renderers.BrowsableAPIRenderer',  # Optional: comment this out if you only want JSON responses
     ],
 }
 
