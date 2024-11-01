@@ -37,6 +37,7 @@ class MessageViewSet(viewsets.ModelViewSet):
                     </body>
                     </html>
                     '''
+                    # recipient_list = ["ekenehanson@gmail.com", "info@simu-l.com"]
                     recipient_list = ["ekenehanson@gmail.com"]
                     from_email = userEmail
 

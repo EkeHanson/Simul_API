@@ -69,21 +69,15 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 REST_FRAMEWORK = {
-    
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,  # 10 messages per page
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-
-    'DEFAULT_RENDERER_CLASSES': [
-    'rest_framework.renderers.JSONRenderer',
-    # 'rest_framework.renderers.BrowsableAPIRenderer',  # Optional: comment this out if you only want JSON responses
     ],
 }
 
@@ -142,23 +136,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'simul_test_db',  # Database name
-        'USER': 'simul_test_db_user',  # Database user
-        'PASSWORD': 'aryCJJ71Lq40ZzUWQ8U3qiNSywYqK8TO',  # Database password
-        'HOST': 'dpg-cs1qpkdds78s73b92urg-a.oregon-postgres.render.com',  # Database host
-        'PORT': '5432',  # Default PostgreSQL port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'simupwsv_simulDB',         # Name of your mysql database
+#         'USER': 'simupwsv_ekenehanson',        
+#         'PASSWORD': '1234567890Qwerty1234567890',
+#         'HOST': 'localhost',        
+#         'PORT': '3306',   
+#     }
+# }
 
 
 
@@ -204,3 +199,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
